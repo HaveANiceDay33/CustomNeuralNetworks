@@ -224,7 +224,7 @@ public class Main extends HvlTemplateInteg2D{
 	public static void showStats(Node n) {
 		hvlDrawQuad(Display.getWidth() - 400, 0, 400, Display.getHeight(), new Color(50, 50, 50));
 		font.drawWord(n.identifier.toString(), Display.getWidth()-375, 20, Color.white, 0.3f);
-		font.drawWordc("Value: "+n.value, Display.getWidth()-200, 75, Color.white, 0.3f);
+		font.drawWordc("Value: "+n.value, Display.getWidth()-200, 75, Color.magenta, 0.3f);
 		font.drawWord("Weights:", Display.getWidth()-375, 100, Color.white, 0.3f);
 		font.drawWord("Bias:", Display.getWidth()-200, 100, Color.white, 0.3f);
 		font.drawWord(""+HvlMath.cropDecimals(n.bias, 4), Display.getWidth()-135, 103, Color.red, 0.26f);
