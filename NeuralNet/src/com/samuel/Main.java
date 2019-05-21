@@ -216,6 +216,22 @@ public class Main extends HvlTemplateInteg2D{
 			}
 		}
 	}
+	
+	/**
+	 * Shows the stats of each node when moused over
+	 * @param n
+	 */
+	public static void showStats(Node n) {
+		hvlDrawQuad(Display.getWidth() - 400, 0, 400, Display.getHeight(), new Color(50, 50, 50));
+		font.drawWord(n.identifier.toString(), Display.getWidth()-375, 20, Color.white, 0.3f);
+		font.drawWordc("Value: "+n.value, Display.getWidth()-200, 75, Color.white, 0.3f);
+		font.drawWord("Weights:", Display.getWidth()-375, 100, Color.white, 0.3f);
+		font.drawWord("Bias:", Display.getWidth()-200, 100, Color.white, 0.3f);
+		font.drawWord(""+HvlMath.cropDecimals(n.bias, 4), Display.getWidth()-135, 103, Color.red, 0.26f);
+		for(int i = 0; i < n.connections; i++) {
+			font.drawWord(""+HvlMath.cropDecimals(n.connectionWeights.get(i), 4), Display.getWidth()-375, 140+(i*30), (i % 2 == 0) ? Color.green : Color.blue, 0.26f);
+		}
+	}
 
 	/**
 	 * Initializes the networks, training data, graphics, camera, and menu properties
@@ -232,9 +248,9 @@ public class Main extends HvlTemplateInteg2D{
 		ui = new HvlMenu();
 		inputBoxes = new ArrayList<>();
 
-		xorGate = new Network(2, 2, 2, 1);
-		halfAdder = new Network(2,2,2,2);
-		fullAdder = new Network(3, 3, 3, 2);
+		xorGate = new Network(2, 4, 1);
+		halfAdder = new Network(2,4,2);
+		fullAdder = new Network(3, 8, 2);
 
 		trainingDataXOR = new ArrayList<>(
 				Arrays.asList(new TrainingData(new int[] {0}, 1, 1),  new TrainingData(new int[] {1}, 0, 1), new TrainingData(new int[] {0}, 0, 0), new TrainingData(new int[] {1} ,1, 0))
@@ -329,20 +345,9 @@ public class Main extends HvlTemplateInteg2D{
 	@Override
 	public void update(float delta) {
 		if(HvlMenu.getCurrent() == ui) {
-
 			for(int i = 0; i < currentNetwork.layers.get(0).numNodes; i++) {
 				font.drawWord("Input "+(i+1)+":", 10, 15+(i*40), Color.white, 0.23f);
 			}
-
-			camera.setX(camX);
-			camera.setY(camY);
-			camera.doTransform(new HvlAction0() { //THIS THING ALLOWS THE Main.zoom TO WORK
-				@Override
-				public void run() {
-					currentNetwork.draw(delta);
-				}
-			});
-
 			if(HvlCursor.getCursorX() > Display.getWidth()-30 && HvlCursor.getCursorX() < Display.getWidth()-10) {camX += 20 * delta;}
 			if(HvlCursor.getCursorX() < 30 && HvlCursor.getCursorX() > 10) {camX -= 20 * delta;}
 			if(HvlCursor.getCursorY() > Display.getHeight()-30 && HvlCursor.getCursorY() < Display.getHeight()-10) {camY += 20 * delta;}
@@ -355,9 +360,19 @@ public class Main extends HvlTemplateInteg2D{
 			hvlDrawQuad(10, 10, 20, Display.getHeight()-20, moveColor);
 			hvlDrawQuad(10, Display.getHeight()-30, Display.getWidth()-20, 20, moveColor);
 			hvlDrawQuad(Display.getWidth()-30, 10, 20, Display.getHeight()-20, moveColor); 
+			font.drawWordc("Hover over a node to see its Value, Bias, and Weights.", Display.getWidth()/2, 60, Color.white, 0.25f);
 			font.drawWord("Total Network Error (Backpropogation Only): "+HvlMath.cropDecimals((float) Math.sqrt(findNetworkError()), 6), 40, Display.getHeight() - 60, Color.white, 0.23f);
 			font.drawWord("POSITIVE", 600, Display.getHeight()-60, Color.blue,0.23f);
 			font.drawWord("NEGATIVE", 710, Display.getHeight()-60, Color.green,0.23f);
+			
+			camera.setX(camX);
+			camera.setY(camY);
+			camera.doTransform(new HvlAction0() { //THIS THING ALLOWS THE Main.zoom TO WORK
+				@Override
+				public void run() {
+					currentNetwork.draw(delta);
+				}
+			});
 		}
 
 		HvlMenu.updateMenus(delta);

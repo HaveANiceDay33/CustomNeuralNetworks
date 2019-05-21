@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
 
+import com.samuel.Network;
+import com.samuel.Node;
+
 public class Layer {
 	
 	private int verticalSpacing;
@@ -22,11 +25,7 @@ public class Layer {
 		nodes = new ArrayList<>();
 		this.numNodes = numNodes;
 		this.id = id;
-		if(this.id == 0) {
-			verticalSpacing = 40;
-		} else {
-			verticalSpacing = 80;
-		}
+		verticalSpacing = 30;
 		float minRange = (Display.getHeight()/2)-((numNodes-1)*verticalSpacing);
 		
 		for(int i = 0; i < numNodes; i++) {
