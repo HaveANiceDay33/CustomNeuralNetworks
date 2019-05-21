@@ -373,6 +373,17 @@ public class Main extends HvlTemplateInteg2D{
 					currentNetwork.draw(delta);
 				}
 			});
+			
+			for(Layer l : currentNetwork.layers) {
+				for(Node n : l.nodes) {
+					if(HvlCursor.getCursorX() > n.x - Node.NODE_SIZE/2 - (camera.getX() - Display.getWidth()/2) && 
+							HvlCursor.getCursorX() < n.x + Node.NODE_SIZE/2 - (camera.getX() - Display.getWidth()/2)&& 
+							HvlCursor.getCursorY() > n.y - Node.NODE_SIZE/2 + (Display.getHeight()/2 - camera.getY())&& 
+							HvlCursor.getCursorY() < n.y + Node.NODE_SIZE/2 + (Display.getHeight()/2 - camera.getY())) {
+						showStats(n);
+					}
+				}
+			}
 		}
 
 		HvlMenu.updateMenus(delta);

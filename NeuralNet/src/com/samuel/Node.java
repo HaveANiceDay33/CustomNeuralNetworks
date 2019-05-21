@@ -12,7 +12,7 @@ import com.osreboot.ridhvl.painter.painter2d.HvlPainter2D;
 
 public class Node {
 	
-	private static final float NODE_SIZE = 40;
+	public static final float NODE_SIZE = 40;
 	
 	public float x, y, bias, value, connections, type, expected;
 	public UID identifier;
@@ -55,11 +55,6 @@ public class Node {
 		}
 		if(this.type != 0) {
 			//Main.font.drawWordc(""+HvlMath.cropDecimals(this.bias,4), this.x, this.y+40, Color.blue, 0.18f);
-		}
-	
-		if(HvlCursor.getCursorX() > this.x - NODE_SIZE/2 && HvlCursor.getCursorX() < this.x + NODE_SIZE/2 && 
-				HvlCursor.getCursorY() > this.y - NODE_SIZE/2 && HvlCursor.getCursorY() < this.y + NODE_SIZE/2) {
-			Main.showStats(this);
 		}
 	}
 }
