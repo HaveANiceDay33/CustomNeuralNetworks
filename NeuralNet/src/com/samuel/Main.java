@@ -250,7 +250,7 @@ public class Main extends HvlTemplateInteg2D{
 
 		xorGate = new Network(2, 2, 1);
 		halfAdder = new Network(2, 2,2);
-		fullAdder = new Network(3, 3, 2);
+		fullAdder = new Network(3, 5, 2);
 
 		trainingDataXOR = new ArrayList<>(
 				Arrays.asList(new TrainingData(new int[] {0}, 1, 1),  new TrainingData(new int[] {1}, 0, 1), new TrainingData(new int[] {0}, 0, 0), new TrainingData(new int[] {1} ,1, 0))
