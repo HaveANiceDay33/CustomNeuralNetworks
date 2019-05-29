@@ -36,7 +36,7 @@ import com.osreboot.ridhvl.template.HvlTemplateInteg2D;
  * @author Samuel Munro
  *
  */
-public class Main extends HvlTemplateInteg2D{
+public class NetworkMain extends HvlTemplateInteg2D{
 	
 	//Graphics init
 	public static final int 
@@ -63,10 +63,10 @@ public class Main extends HvlTemplateInteg2D{
 	Network fullAdder;
 
 	public static void main(String [] args){
-		new Main();
+		new NetworkMain();
 	}
 
-	public Main(){
+	public NetworkMain(){
 		super(60, 1440, 720, "Neural Network Testing", new HvlDisplayModeDefault());
 	}
 	
@@ -92,6 +92,26 @@ public class Main extends HvlTemplateInteg2D{
 					}
 					tempValue += n.bias;
 					n.value = (float) (1/(1+Math.pow(Math.E, -tempValue))); 
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Useful for genetic algorithms
+	 * @param n
+	 */
+	public static void propogateAsNetwork(Network n) {
+		for(int l = 0; l < n.layers.size(); l++) {
+			if(n.layers.get(l).id != 0) {
+				for(Node node : n.layers.get(l).nodes) {
+					float tempValue = 0;
+					//the value of a node is all of its weights multiplied by the previous layer's node values, plus the node's bias.
+					for(int i = 0; i < node.connections; i++) {
+						tempValue += (node.connectionWeights.get(i) * n.layers.get(l-1).nodes.get(i).value); 
+					}
+					tempValue += node.bias;
+					node.value = (float) (1/(1+Math.pow(Math.E, -tempValue))); 
 				}
 			}
 		}
@@ -285,7 +305,7 @@ public class Main extends HvlTemplateInteg2D{
 			}
 		}).build());
 
-		HvlComponentDefault.setDefault(new HvlTextBox.Builder().setWidth(100).setHeight(30).setFont(Main.font).setTextColor(Color.darkGray).setTextScale(0.25f).setOffsetY(5).setOffsetX(5).setText("").setNumbersOnly(true).setFocusedDrawable(new HvlComponentDrawable() {	
+		HvlComponentDefault.setDefault(new HvlTextBox.Builder().setWidth(100).setHeight(30).setFont(NetworkMain.font).setTextColor(Color.darkGray).setTextScale(0.25f).setOffsetY(5).setOffsetX(5).setText("").setNumbersOnly(true).setFocusedDrawable(new HvlComponentDrawable() {	
 			@Override
 			public void draw(float delta, float x, float y, float width, float height) {
 				hvlDrawQuad(x,y,width,height, Color.lightGray);	
@@ -367,7 +387,7 @@ public class Main extends HvlTemplateInteg2D{
 			
 			camera.setX(camX);
 			camera.setY(camY);
-			camera.doTransform(new HvlAction0() { //THIS THING ALLOWS THE Main.zoom TO WORK
+			camera.doTransform(new HvlAction0() { //THIS THING ALLOWS THE NetworkMain.zoom TO WORK
 				@Override
 				public void run() {
 					currentNetwork.draw(delta);
