@@ -5,8 +5,10 @@ import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.opengl.Texture;
 
 import com.osreboot.ridhvl.HvlMath;
+import com.osreboot.ridhvl.painter.painter2d.HvlFontPainter2D;
 
 public class Network {
 	
@@ -36,13 +38,13 @@ public class Network {
 	    float g = HvlMath.limit(1f - Math.abs(xArg), 0f, 1f);
 	    float b = HvlMath.mapl(xArg, -1f, 0f, 0f, 1f);
 	    return new Color(g, r, b);
-	}
+	} 
 	
 	/**
 	 * Handles all network drawing
 	 * @param delta
 	 */
-	public void draw(float delta) {
+	public void draw(float delta, HvlFontPainter2D font, Texture t) {
 		for(int i = 0; i < layers.size(); i++) {
 			for(int j = 0; j < layers.get(i).numNodes; j++) {
 				for(int k = 0; k < layers.get(i).nodes.get(j).connections; k++) {
@@ -55,12 +57,16 @@ public class Network {
 		}
 		
 		for(Layer l : layers) {
-			l.draw(delta);
+			l.draw(delta, font, t);
 		}
 		
 	}
 	
 	public Layer lastLayer() {
 		return this.layers.get(this.layers.size()-1);
+	}
+	
+	protected Object clone() throws CloneNotSupportedException {
+	    return super.clone();
 	}
 }	

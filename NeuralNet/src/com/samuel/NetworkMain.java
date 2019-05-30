@@ -390,7 +390,7 @@ public class NetworkMain extends HvlTemplateInteg2D{
 			camera.doTransform(new HvlAction0() { //THIS THING ALLOWS THE NetworkMain.zoom TO WORK
 				@Override
 				public void run() {
-					currentNetwork.draw(delta);
+					currentNetwork.draw(delta, font, getTexture(CIRCLE_INDEX));
 				}
 			});
 			

@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.opengl.Texture;
 
 import com.osreboot.ridhvl.HvlMath;
 import com.osreboot.ridhvl.painter.HvlCursor;
+import com.osreboot.ridhvl.painter.painter2d.HvlFontPainter2D;
 import com.osreboot.ridhvl.painter.painter2d.HvlPainter2D;
 
 public class Node {
@@ -31,7 +33,7 @@ public class Node {
 		this.y = y;
 		this.type = type;
 		this.identifier = new UID();
-		
+		 
 		if(this.type == 0) {
 			this.bias = 0;
 			this.connections = 0;
@@ -47,9 +49,9 @@ public class Node {
 		}
 	}
 	
-	public void draw(float delta) {
-		HvlPainter2D.hvlDrawQuadc(this.x, this.y, NODE_SIZE, NODE_SIZE, NetworkMain.getTexture(NetworkMain.CIRCLE_INDEX));
-		NetworkMain.font.drawWordc(""+HvlMath.cropDecimals(this.value, 3), this.x, this.y, Color.black, 0.18f);
+	public void draw(float delta, HvlFontPainter2D font, Texture t) {
+		HvlPainter2D.hvlDrawQuadc(this.x, this.y, NODE_SIZE, NODE_SIZE, t);
+		font.drawWordc(""+HvlMath.cropDecimals(this.value, 3), this.x, this.y, Color.black, 0.18f);
 		for(Integer i : this.connectionWeights.keySet()) {
 			//NetworkMain.font.drawWordc(""+HvlMath.cropDecimals(this.connectionWeights.get(i), 4), this.x, this.y-35-(i*20), Color.green, 0.18f);
 		}

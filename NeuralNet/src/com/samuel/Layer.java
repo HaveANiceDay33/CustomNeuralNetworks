@@ -3,7 +3,9 @@ package com.samuel;
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
+import org.newdawn.slick.opengl.Texture;
 
+import com.osreboot.ridhvl.painter.painter2d.HvlFontPainter2D;
 import com.samuel.Network;
 import com.samuel.Node;
 
@@ -16,7 +18,7 @@ public class Layer {
 	public int numNodes, id;
 	
 	/**
-	 * Layers contain nodes and belong to a network
+	 * Layers contain nodes and belong to a network 
 	 * @param numNodes
 	 * @param id
 	 * @param net
@@ -39,9 +41,9 @@ public class Layer {
 		}
 	}
 	
-	public void draw(float delta) {
+	public void draw(float delta, HvlFontPainter2D font, Texture t) {
 		for(Node n : nodes) {
-			n.draw(delta);
+			n.draw(delta, font, t);
 		}
 	}
 }
