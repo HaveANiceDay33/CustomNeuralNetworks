@@ -50,7 +50,6 @@ public class Node {
 	}
 	
 	public void draw(float delta, HvlFontPainter2D font, Texture t) {
-		HvlPainter2D.hvlDrawQuadc(this.x, this.y, NODE_SIZE+3, NODE_SIZE+3, t);
 		HvlPainter2D.hvlDrawQuadc(this.x, this.y, NODE_SIZE, NODE_SIZE, t, new Color(0f, (1-value), (value)));
 		font.drawWordc(""+HvlMath.cropDecimals(this.value, 3), this.x, this.y, value > 0.5 ? Color.white : Color.black, 0.18f);
 		for(Integer i : this.connectionWeights.keySet()) {
