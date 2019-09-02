@@ -14,7 +14,7 @@ public class Layer {
 	private int verticalSpacing;
 	private final int HORIZ_SPACING = 125;
 	
-	ArrayList<Node> nodes;
+	public ArrayList<Node> nodes;
 	public int numNodes, id;
 	
 	/**
@@ -41,9 +41,9 @@ public class Layer {
 		}
 	}
 	
-	public void draw(float delta, HvlFontPainter2D font, Texture t) {
+	public void draw(float delta, HvlFontPainter2D font, Texture t, float fontSize) {
 		for(Node n : nodes) {
-			n.draw(delta, font, t);
+			n.draw(delta, font, t, fontSize);
 		}
 	}
 }

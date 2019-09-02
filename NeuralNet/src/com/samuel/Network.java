@@ -2,6 +2,7 @@ package com.samuel;
 
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
@@ -10,8 +11,8 @@ import org.newdawn.slick.opengl.Texture;
 import com.osreboot.ridhvl.HvlMath;
 import com.osreboot.ridhvl.painter.painter2d.HvlFontPainter2D;
 
-public class Network {
-	
+public class Network implements Serializable, Cloneable{
+	private static final long serialVersionUID = 1L;
 	public ArrayList<Layer> layers;
 	
 	/**
@@ -44,7 +45,7 @@ public class Network {
 	 * Handles all network drawing
 	 * @param delta
 	 */
-	public void draw(float delta, HvlFontPainter2D font, Texture t) {
+	public void draw(float delta, HvlFontPainter2D font, Texture t, float fontSize) {
 		for(int i = 0; i < layers.size(); i++) {
 			for(int j = 0; j < layers.get(i).numNodes; j++) {
 				for(int k = 0; k < layers.get(i).nodes.get(j).connections; k++) {
@@ -57,7 +58,7 @@ public class Network {
 		}
 		
 		for(Layer l : layers) {
-			l.draw(delta, font, t);
+			l.draw(delta, font, t, fontSize);
 		}
 		
 	}
@@ -66,7 +67,12 @@ public class Network {
 		return this.layers.get(this.layers.size()-1);
 	}
 	
-	protected Object clone() throws CloneNotSupportedException {
-	    return super.clone();
+	public static void deleteNetwork(Network n) {
+		n = null;
+	}
+	
+	public Object clone() throws CloneNotSupportedException {
+	    Network cloned = (Network)super.clone();  
+	    return cloned;
 	}
 }	
