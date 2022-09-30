@@ -111,7 +111,8 @@ public class NetworkMain extends HvlTemplateInteg2D{
 						tempValue += (node.connectionWeights.get(i) * n.layers.get(l-1).nodes.get(i).value); 
 					}
 					tempValue += node.bias;
-					node.value = (float) (1/(1+Math.pow(Math.E, -tempValue))); 
+					//node.value = (float) (1/(1+Math.pow(Math.E, -tempValue))); 
+					node.value = (float) Math.tanh(tempValue);
 				}
 			}
 		}
@@ -268,9 +269,9 @@ public class NetworkMain extends HvlTemplateInteg2D{
 		ui = new HvlMenu();
 		inputBoxes = new ArrayList<>();
 
-		xorGate = new Network(2, 2, 1);
+		xorGate = new Network(2, 3, 1);
 		halfAdder = new Network(2, 2,2);
-		fullAdder = new Network(3, 5, 2);
+		fullAdder = new Network(3,4,2);
 
 		trainingDataXOR = new ArrayList<>(
 				Arrays.asList(new TrainingData(new int[] {0}, 1, 1),  new TrainingData(new int[] {1}, 0, 1), new TrainingData(new int[] {0}, 0, 0), new TrainingData(new int[] {1} ,1, 0))
@@ -285,8 +286,8 @@ public class NetworkMain extends HvlTemplateInteg2D{
 						new TrainingData(new int[]{1,0}, 1, 0, 0), new TrainingData(new int[]{0, 1}, 1, 0, 1), new TrainingData(new int[]{0, 1}, 1, 1, 0), new TrainingData(new int[]{1,1},1, 1, 1))
 				);
 
-		currentNetwork = fullAdder;
-		currentTrainingData = trainingDataFullAdder;
+		currentNetwork = xorGate;
+		currentTrainingData = trainingDataXOR;
 
 		HvlComponentDefault.setDefault(HvlLabeledButton.class, new HvlLabeledButton.Builder().setWidth(200).setHeight(30).setFont(font).setTextColor(Color.white).setTextScale(0.25f).setOnDrawable(new HvlComponentDrawable() {
 			@Override

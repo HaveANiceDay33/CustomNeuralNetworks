@@ -28,7 +28,7 @@ public class Node {
 	 * @param connections
 	 * @param type
 	 */
-	public Node(float x, float y, int connections, int type) {
+	public Node(float x, float y, float connections, float type) {
 		this.x = x;
 		this.y = y;
 		this.type = type;
