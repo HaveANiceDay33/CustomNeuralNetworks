@@ -111,8 +111,8 @@ public class NetworkMain extends HvlTemplateInteg2D{
 						tempValue += (node.connectionWeights.get(i) * n.layers.get(l-1).nodes.get(i).value); 
 					}
 					tempValue += node.bias;
-					//node.value = (float) (1/(1+Math.pow(Math.E, -tempValue))); 
-					node.value = (float) Math.tanh(tempValue);
+					node.value = (float) (1/(1+Math.pow(Math.E, -tempValue))); 
+					//node.value = (float) Math.tanh(tempValue);
 				}
 			}
 		}
