@@ -28,6 +28,10 @@ import com.osreboot.ridhvl.painter.HvlCamera2D;
 import com.osreboot.ridhvl.painter.HvlCursor;
 import com.osreboot.ridhvl.painter.painter2d.HvlFontPainter2D;
 import com.osreboot.ridhvl.template.HvlTemplateInteg2D;
+import com.samuel.Layer;
+import com.samuel.Network;
+import com.samuel.Node;
+import com.samuel.TrainingData;
 
 /**
  * The purpose of this project is to run neural networks and solve problems!
