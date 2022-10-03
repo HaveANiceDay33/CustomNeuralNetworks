@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
@@ -111,11 +112,12 @@ public class NetworkMain extends HvlTemplateInteg2D{
 						tempValue += (node.connectionWeights.get(i) * n.layers.get(l-1).nodes.get(i).value); 
 					}
 					tempValue += node.bias;
-					node.value = (float) (1/(1+Math.pow(Math.E, -tempValue))); 
-					//node.value = (float) Math.tanh(tempValue);
+					//node.value = (float) (1/(1+Math.pow(Math.E, -tempValue))); 
+					node.value = (float) Math.tanh(tempValue);
 				}
 			}
 		}
+
 	}
 
 	/**
