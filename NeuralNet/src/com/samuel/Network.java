@@ -41,7 +41,7 @@ public class Network {
 	    float r = HvlMath.mapl(xArg, 1f, 0f, 0f, 1f);
 	    float g = HvlMath.limit(1f - Math.abs(xArg), 0f, 1f);
 	    float b = HvlMath.mapl(xArg, -1f, 0f, 0f, 1f);
-	    return new Color(g, r, b);
+	    return new Color(g, r, b, Math.abs(xArg));
 	} 
 	
 	/**
